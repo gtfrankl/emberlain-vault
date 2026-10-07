@@ -1,0 +1,101 @@
+:root {
+  --bg: #070b1a;
+  --iron: #1c2238;
+  --iron-hi: #2b3554;
+  --ember: #3d8bff;
+  --glow: #8fd0ff;
+  --text: #dbe8ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 100%, #10235a 0%, var(--bg) 60%);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  text-align: center;
+}
+main { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 2.5rem 1rem; }
+h1 { letter-spacing: 0.15em; text-transform: uppercase; color: var(--glow); text-shadow: 0 0 18px var(--ember); }
+.inscription { font-style: italic; opacity: 0.85; }
+
+.door {
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  background: linear-gradient(145deg, var(--iron-hi), var(--iron));
+  border: 4px solid #04070f;
+  border-radius: 12px;
+  box-shadow: inset 0 0 30px #000, 0 0 40px rgba(60, 130, 255, 0.3);
+  transition: box-shadow 1s, transform 1.2s;
+}
+.door.open { box-shadow: inset 0 0 30px #000, 0 0 80px 10px var(--ember); transform: scale(1.03); }
+.door.shake { animation: shake 0.4s; }
+@keyframes shake {
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.dials { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.dial {
+  width: 4rem; height: 5.5rem;
+  font-size: 2.6rem;
+  color: var(--glow);
+  background: #0e1426;
+  border: 2px solid #3e4d78;
+  border-radius: 8px;
+  text-shadow: 0 0 12px var(--ember);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.dial:hover, .dial:focus-visible { border-color: var(--ember); box-shadow: 0 0 14px var(--ember); outline: none; }
+.dial.yellow { color: #ffe14d; border-color: #ffe14d; box-shadow: 0 0 18px #ffe14d; text-shadow: 0 0 14px #ffe14d; }
+.dial.green { color: #5dff7a; border-color: #5dff7a; box-shadow: 0 0 18px #5dff7a; text-shadow: 0 0 14px #5dff7a; }
+.dial.tick { animation: tick 0.18s; }
+@keyframes tick { 0% { transform: translateY(-8px); opacity: 0.4; } 100% { transform: none; opacity: 1; } }
+
+.lever {
+  margin-top: 1.75rem;
+  padding: 0.7rem 1.6rem;
+  font: inherit;
+  letter-spacing: 0.1em;
+  color: #06122b;
+  background: linear-gradient(var(--glow), var(--ember));
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lever:hover:not(:disabled) { filter: brightness(1.15); }
+.lever:disabled { opacity: 0.4; cursor: default; }
+
+.status { min-height: 1.5em; color: var(--glow); }
+.attempts { opacity: 0.6; font-size: 0.9rem; }
+.history { margin: 1.5rem 0; }
+.history h2 { font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--glow); }
+.history ol { list-style: none; margin: 0; padding: 0; counter-reset: try; }
+.history li { counter-increment: try; display: flex; gap: 0.4rem; justify-content: center; align-items: center; margin: 0.4rem 0; }
+.history li::before { content: counter(try); width: 1.5rem; text-align: right; opacity: 0.5; font-size: 0.85rem; margin-right: 0.4rem; }
+.pip { width: 2.4rem; height: 2.8rem; display: grid; place-items: center; font-size: 1.5rem; background: #0e1426; border: 2px solid #2b3554; border-radius: 6px; color: #7283a8; }
+.pip.yellow { color: #ffe14d; border-color: #ffe14d; box-shadow: 0 0 8px #ffe14d; }
+.pip.green { color: #5dff7a; border-color: #5dff7a; box-shadow: 0 0 8px #5dff7a; }
+.hints { text-align: left; margin: 1.5rem 0; padding: 0.5rem 1.5rem 1rem; border: 1px dashed #3e4d78; border-radius: 8px; }
+.hints h2 { text-align: center; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--glow); }
+.hints li { margin: 0.5rem 0; font-style: italic; }
+.reveal { border: 1px solid var(--ember); border-radius: 8px; padding: 1rem 1.5rem; background: rgba(80, 150, 255, 0.1); animation: fade 1.5s; }
+.reveal[hidden] { display: none; }
+@keyframes fade { from { opacity: 0; } }
+
+.embers { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.embers span { /* arcane motes */
+  position: absolute; bottom: -10px;
+  width: var(--s); height: var(--s);
+  background: var(--glow);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--ember);
+  animation: rise linear infinite;
+}
+@keyframes rise { to { transform: translateY(-110vh) translateX(40px); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .embers { display: none; }
+  * { animation: none !important; transition: none !important; }
+}

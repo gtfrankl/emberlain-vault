@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Emberlain Vault</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>The Emberlain Vault</h1>
+    <p class="inscription" id="inscription"></p>
+
+    <div class="door" id="door">
+      <div class="dials" id="dials" role="group" aria-label="Rune dials"></div>
+      <button class="lever" id="lever" type="button">Pull the Lever</button>
+    </div>
+
+    <p class="status" id="status" aria-live="polite"></p>
+    <p class="attempts" id="attempts"></p>
+
+    <section class="history" id="history" hidden>
+      <h2>Previous attempts</h2>
+      <ol id="historyList"></ol>
+    </section>
+
+    <section class="hints" id="hints" hidden>
+      <h2>Etched in the iron</h2>
+      <ol id="hintList"></ol>
+    </section>
+
+    <section class="reveal" id="reveal" hidden>
+      <h2>The vault opens</h2>
+      <p id="revealText"></p>
+    </section>
+  </main>
+  <div class="embers" id="embers" aria-hidden="true"></div>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
